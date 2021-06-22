@@ -37,22 +37,17 @@ class Command
      */
     private $storage;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $deliver_day;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsersId(): ?int
+    public function getUserId(): ?int
     {
         return $this->users_id;
     }
 
-    public function setUsersId(int $users_id): self
+    public function setUserId(int $users_id): self
     {
         $this->users_id = $users_id;
 
@@ -95,15 +90,4 @@ class Command
         return $this;
     }
 
-    public function getDeliverDay(): ?\DateTimeInterface
-    {
-        return $this->deliver_day;
-    }
-
-    public function setDeliverDay(\DateTimeInterface $deliver_day): self
-    {
-        $this->deliver_day = $deliver_day;
-
-        return $this;
-    }
 }
