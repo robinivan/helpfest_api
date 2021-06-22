@@ -61,4 +61,39 @@ class CommandController extends AbstractController
         // in the template, print things with {{ product.name }}
         // return $this->render('product/show.html.twig', ['product' => $product]);
     }
+
+    /**
+     * @Route("/user_command/{id}", name="user_command_show")
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function showUserCommand(int $id):  JsonResponse
+    {
+        $product = $this->getDoctrine()
+            ->getRepository(Command::class)
+            ->findBy(
+                ['users_id' => $id]
+            );
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No command found for id '.$id
+            );
+        }
+        $data=[];
+        foreach ($product as $i){
+
+            $name=$i->getProductName();
+            $id_1=$i->getId();
+            $storage=$i->getStorage();
+            $data1=['name'=>$name, 'id'=>$id_1, 'storage'=>$storage];
+            array_push($data, $data1);
+        }
+
+        return new  JsonResponse(['data' => $data, 'message'=>'Commands for the Client with id '.$id,'success'=> true]);
+
+        // or render a template
+        // in the template, print things with {{ product.name }}
+        // return $this->render('product/show.html.twig', ['product' => $product]);
+    }
 }
