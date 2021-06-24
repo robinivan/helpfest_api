@@ -32,6 +32,11 @@ class Pet
      */
     private $bage_number;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $user_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +74,18 @@ class Pet
     public function setBageNumber(?string $bage_number): self
     {
         $this->bage_number = $bage_number;
+
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }
